@@ -9,6 +9,7 @@ nJob_samsort=3; nThread_samsort=4; threadMem_samsort=2G
 nJobs_sorttest=2
 
 searchDir=~/projects/NERR_JGI/data/*metaG_FD
+
 time find $searchDir -type f -name "*.sam\.**" -not -empty | \
     parallel --joblog ${joblogDir}/sam_to_sort_bam_${datetime}.joblog --jobs $nJob_samsort samtools view -huS -F4 {} '|' samtools sort -@ $nThread_samsort -m $threadMem_samsort -o - '>' {.}_sorted.bam && echo DONE
 
@@ -22,7 +23,7 @@ exitStats_sorttest=$( tail -n +2 $joblog_sorttest | awk '$7 == 0' | wc -l )
         :;
 
     else
-        echo "WARNING: $exitStats_sorttest BAM files were not sorted. Ensure BAM files are sorted and have correct headers before proceeding."
+        echo "WARNING: $exitStats_sorttest selected BAM files were not sorted. Ensure BAM files are sorted and have correct headers before proceeding."
         echo "Exiting..."
         exit 1
     fi

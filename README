@@ -1,2 +1,4 @@
-Purpose: scripts for binning large-scale metagenomic data for HPC clusters
-using SLURM.
+Purpose: scripts for binning large-scale metagenomic data.
+
+Workflows will make use of Conda environments, so please ensure that
+Anaconda or Miniconda are installed on your system.
